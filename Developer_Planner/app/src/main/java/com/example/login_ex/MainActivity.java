@@ -71,54 +71,54 @@ public class MainActivity extends AppCompatActivity {
         //GPS 시스템 활용을 위한 Location Manager 선언
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-//        getWeatherDetails();
+        getWeatherDetails();
 
     }
 
-//    public void getWeatherDetails() {
-//        //위치에 따른 날씨 정보를 가져오는 함수로서, 먼저 사용자 위치 권한을 허가받기
-//        if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 0);
-//        } else {
-//            //GPS Provider 통해 위도와 경도 값 받기
-//            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-//            double longitude = location.getLongitude();
-//            double latitude = location.getLatitude();
-//
-//            //몇 초, 얼마의 거리마다 정보를 갱신 받을 것인지 지정
-//            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, gpsLocationListener);
-//            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, gpsLocationListener);
-//
-//            //사용자가 JSON 데이터를 받아올 주소 형식 지정
-//            String tempUrl = "";
-//            tempUrl = url + "?lat=" + latitude + "&lon=" + longitude + "&appid=" + appid;
-//
-//            //지정한 주소 형식을 요청하여 리소스를 생성하고 받아오기
-//            StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, new Response.Listener<String>() {
-//                @Override
-//                public void onResponse(String response) {
-//                    try {
-//                        JSONObject jsonObject = new JSONObject(response);
-//                        JSONArray jsonArray = jsonObject.getJSONArray("weather");
-//                        JSONObject jsonObjectWeather = jsonArray.getJSONObject(0);
-//                        String icon = jsonObjectWeather.getString("icon");
-//                        String iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
-//
-//                        Picasso.get().load(iconUrl).into(weatherIcon);
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }, new Response.ErrorListener() {
-//                @Override
-//                public void onErrorResponse(VolleyError error) {
-//                    Toast.makeText(getApplicationContext(), error.toString().trim(), Toast.LENGTH_SHORT).show();
-//                }
-//            });
-//            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-//            requestQueue.add(stringRequest);
-//        }
-//    }
+    public void getWeatherDetails() {
+        //위치에 따른 날씨 정보를 가져오는 함수로서, 먼저 사용자 위치 권한을 허가받기
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+        } else {
+            //GPS Provider 통해 위도와 경도 값 받기
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            double longitude = location.getLongitude();
+            double latitude = location.getLatitude();
+
+            //몇 초, 얼마의 거리마다 정보를 갱신 받을 것인지 지정
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, gpsLocationListener);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, gpsLocationListener);
+
+            //사용자가 JSON 데이터를 받아올 주소 형식 지정
+            String tempUrl = "";
+            tempUrl = url + "?lat=" + latitude + "&lon=" + longitude + "&appid=" + appid;
+
+            //지정한 주소 형식을 요청하여 리소스를 생성하고 받아오기
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, tempUrl, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        JSONArray jsonArray = jsonObject.getJSONArray("weather");
+                        JSONObject jsonObjectWeather = jsonArray.getJSONObject(0);
+                        String icon = jsonObjectWeather.getString("icon");
+                        String iconUrl = "http://openweathermap.org/img/w/" + icon + ".png";
+
+                        Picasso.get().load(iconUrl).into(weatherIcon);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.toString().trim(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+        }
+    }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
