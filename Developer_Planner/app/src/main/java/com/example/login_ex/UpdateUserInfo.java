@@ -66,7 +66,6 @@ public class UpdateUserInfo extends AppCompatActivity {
                                     }
                                 }
                             });
-
                 }
             }
         };
@@ -95,8 +94,4 @@ public class UpdateUserInfo extends AppCompatActivity {
             }
         }
     };
-
-    private void ToastMessage(String message){
-        Toast.makeText(this, message,Toast.LENGTH_SHORT).show();
-    }
 }
