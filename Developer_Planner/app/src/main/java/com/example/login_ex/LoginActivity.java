@@ -19,6 +19,7 @@ import com.facebook.login.widget.LoginButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -111,7 +112,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
                 .build();
 
-        auth = FirebaseAuth.getInstance(); // 파이어베이스 인증 객체 초기화;
+        auth = FirebaseAuth.getInstance(); // 파이어베이스 인증 객체 초기화
 
         btn_google = findViewById(R.id.btn_google);
         btn_google.setOnClickListener(new View.OnClickListener() { // 구글 로그인 버튼을 클릭했을 때 이곳을 수행
@@ -178,29 +179,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        SharedPreferences sharedPreferences = getSharedPreferences("sFile", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        String text = String.valueOf(loginCnt);
-        editor.putString("text",text);
-        editor.commit();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        SharedPreferences sharedPreferences = getSharedPreferences("sFile", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        String text = String.valueOf(loginCnt);
-        editor.putString("text",text);
-        editor.commit();
-    }
-
-
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
@@ -226,8 +204,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private void login(){
         String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
         String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
-        DatabaseReference userDB = FirebaseDatabase.getInstance().getReference();
-        SharedPreferences sharedPreferences = getSharedPreferences("sFile", MODE_PRIVATE);
         // 로그인 정보 미입력시
         if (email.length() > 0 && password.length() > 0){
             // Firebase Auth 정보에 사용자가 입력한 이메일과 패스워드가 일치하는지 확인
@@ -237,18 +213,19 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                String cntText = sharedPreferences.getString("text","");
                                 {
                                     if ( user != null){
                                         if(user.getDisplayName() == null){
                                             Intent intent = new Intent(LoginActivity.this, Member_InitInfo.class);
-                                            intent.putExtra("password",password);
                                             startActivity(intent);
                                         }else {
                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                            intent.putExtra("password",password);
                                             startActivity(intent);
                                         }
+                                        SharedPreferences sharedPreferences = getSharedPreferences("pFile",MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                                        editor.putString("password",password);
+                                        editor.apply();
                                     }
                                 };
                             }else {

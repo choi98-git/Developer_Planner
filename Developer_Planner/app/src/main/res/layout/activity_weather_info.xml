@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F0E3C4"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".MainActivity">
@@ -27,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="#0070C7"
+            android:background="@drawable/round_background"
             android:backgroundTint="@null"
             android:onClick="getWeatherDetails"
             android:text="Update!"
@@ -52,7 +53,7 @@
         <ImageView
             android:id="@+id/weatherIcon"
             android:layout_width="100dp"
-            android:layout_height="100dp"/>
+            android:layout_height="100dp" />
 
     </LinearLayout>
 

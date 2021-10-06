@@ -1,6 +1,7 @@
 package com.example.login_ex;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -26,6 +27,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.login_ex.calendarpart.Calendar;
+import com.example.login_ex.eventpart.EventMain;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -43,7 +46,6 @@ import java.text.DecimalFormat;
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     ImageView weatherIcon;
-    String password = "";
     private long backBtnTime = 0;
 
     //데이터를 호출할 서비스의 기본 주소
@@ -60,20 +62,30 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Intent intent = getIntent();
-        password = intent.getStringExtra("password");
 
 
         weatherIcon = findViewById(R.id.mainWeatherIcon);
         findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
-        findViewById(R.id.initInfoButton).setOnClickListener(onClickListener);
         findViewById(R.id.weatherInfoButton2).setOnClickListener(onClickListener);
-        findViewById(R.id.updateUserInfo).setOnClickListener(onClickListener);
+        findViewById(R.id.SettingButton).setOnClickListener(onClickListener);
+        findViewById(R.id.calendarButton).setOnClickListener(onClickListener);
+        findViewById(R.id.eventButton).setOnClickListener(onClickListener);
 
         //GPS 시스템 활용을 위한 Location Manager 선언
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         getWeatherDetails();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // 앱이 실행될 때 로그인이 되어있지 않으면 실행
+        if (mAuth.getCurrentUser() == null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void getWeatherDetails() {
@@ -129,16 +141,20 @@ public class MainActivity extends AppCompatActivity {
                     Logout();
                     break;
 
-                case R.id.initInfoButton:
-                    GoInitInfo();
-                    break;
-
                 case R.id.weatherInfoButton2:
                     GoWeather();
                     break;
 
-                case R.id.updateUserInfo:
-                    CheckPassWord();
+                case R.id.SettingButton:
+                    GoSetting();
+                    break;
+
+                case R.id.calendarButton:
+                    GoCalendar();
+                    break;
+
+                case R.id.eventButton:
+                    GoEvent();
                     break;
 
             }
@@ -160,14 +176,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void GoInitInfo(){
-        Intent intent = new Intent(MainActivity.this, Member_InitInfo.class);
+    private void GoSetting(){
+        Intent intent = new Intent(MainActivity.this, Setting.class);
         startActivity(intent);
     }
 
-    private void CheckPassWord(){
-        Intent intent = new Intent(MainActivity.this, Check_Password.class);
-        intent.putExtra("password",password);
+    private void GoCalendar(){
+        Intent intent = new Intent(MainActivity.this, Calendar.class);
+        startActivity(intent);
+    }
+
+    private void GoEvent(){
+        Intent intent = new Intent(MainActivity.this, EventMain.class);
         startActivity(intent);
     }
 

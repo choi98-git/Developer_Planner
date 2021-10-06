@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,14 +24,12 @@ public class UpdateUserInfo extends AppCompatActivity {
 
     AlertDialog.Builder dlg;
     DialogInterface.OnClickListener yes;
-    String password = "";
     FirebaseUser user;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_user_info);
-        Intent intent = getIntent();
-        password = intent.getStringExtra("password");
+
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         findViewById(R.id.changePassword).setOnClickListener(onClickListener);
@@ -78,7 +77,6 @@ public class UpdateUserInfo extends AppCompatActivity {
             switch(v.getId()){
                 case R.id.changePassword:
                     Intent intent = new Intent(UpdateUserInfo.this, UpdatePassword.class);
-                    intent.putExtra("password",password);
                     startActivity(intent);
                     break;
 

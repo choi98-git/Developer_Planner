@@ -1,6 +1,7 @@
 package com.example.login_ex;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,7 +34,6 @@ public class Check_Password extends AppCompatActivity {
         setEmailText();
         CheckPassword();
 
-
     }
     private void setEmailText(){
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -43,15 +44,14 @@ public class Check_Password extends AppCompatActivity {
     }
 
     private void CheckPassword(){
-        Intent intent = getIntent();
-        String password = intent.getStringExtra("password");
+        SharedPreferences sf = getSharedPreferences("pFile",MODE_PRIVATE);
+        String password = sf.getString("password","null");
         checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (passwordEditText.length() > 0) {
                     if (passwordEditText.getText().toString().equals(password)) {
                         Intent intent1 = new Intent(Check_Password.this, UpdateUserInfo.class);
-                        intent.putExtra("password",password);
                         startActivity(intent1);
                     } else {
                         ToastMessage("입력하신 비밀번호가 틀렸습니다!!");
