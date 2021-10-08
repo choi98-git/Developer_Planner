@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/nameEditText"
+        android:id="@+id/userName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -34,7 +34,7 @@
         app:layout_constraintTop_toBottomOf="@id/titleText" />
 
     <EditText
-        android:id="@+id/nicknameEditText"
+        android:id="@+id/userNickname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -43,10 +43,10 @@
         android:hint="닉네임"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nameEditText" />
+        app:layout_constraintTop_toBottomOf="@id/userName" />
 
     <EditText
-        android:id="@+id/dateOfBirthEditText"
+        android:id="@+id/userDateOfBirth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -55,10 +55,10 @@
         android:hint="생년월일"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nicknameEditText" />
+        app:layout_constraintTop_toBottomOf="@id/userNickname" />
 
     <EditText
-        android:id="@+id/phoneNumberEditText"
+        android:id="@+id/userPhoneNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -67,21 +67,20 @@
         android:hint="전화번호"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dateOfBirthEditText" />
+        app:layout_constraintTop_toBottomOf="@id/userDateOfBirth" />
 
     <Button
-        android:id="@+id/initInfoButton"
+        android:id="@+id/updateInfoButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:background="@drawable/round_background"
         android:fontFamily="@font/godom"
-        android:text="정보 입력"
+        android:text="정보 수정"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/phoneNumberEditText" />
+        app:layout_constraintTop_toBottomOf="@id/userPhoneNumber" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

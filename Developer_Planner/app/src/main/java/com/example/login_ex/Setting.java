@@ -16,6 +16,7 @@ public class Setting extends AppCompatActivity {
 
 
         findViewById(R.id.btn_updateUserInfo).setOnClickListener(onClickListener);
+        findViewById(R.id.btn_updatePersonInfo).setOnClickListener(onClickListener);
     }
 
     View.OnClickListener onClickListener = new View.OnClickListener() {
@@ -23,15 +24,25 @@ public class Setting extends AppCompatActivity {
         public void onClick(View v) {
             switch(v.getId()){
                 case R.id.btn_updateUserInfo:
-                    UserInfo();
+                    CheckPassWord();
+                    break;
+
+                case R.id.btn_updatePersonInfo:
+                    updateUserInfo();
                     break;
 
             }
         }
     };
 
-    private void UserInfo(){
-        Intent intent = new Intent(Setting.this, Check_PersonInfo.class);
+    private void updateUserInfo() {
+        Intent intent = new Intent(Setting.this, Modify_User_Info.class);
         startActivity(intent);
+    }
+
+    private void CheckPassWord() {
+        Intent intent = new Intent(Setting.this, Check_Password.class);
+        startActivity(intent);
+
     }
 }

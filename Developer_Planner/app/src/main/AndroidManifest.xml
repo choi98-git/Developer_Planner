@@ -26,9 +26,6 @@
             android:name=".WeatherInfo"
             android:exported="true" />
         <activity
-            android:name=".Check_PersonInfo"
-            android:exported="true" />
-        <activity
             android:name=".Setting"
             android:exported="true" />
         <activity
@@ -50,6 +47,7 @@
         <activity android:name=".calendarpart.Calendar" />
         <activity android:name=".calendarpart.ScheduleMemo" />
         <activity android:name=".calendarpart.DdayActivity" />
+        <activity android:name=".Modify_User_Info"/>
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

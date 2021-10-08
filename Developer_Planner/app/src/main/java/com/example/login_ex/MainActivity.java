@@ -66,8 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
         weatherIcon = findViewById(R.id.mainWeatherIcon);
         findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
-        findViewById(R.id.weatherInfoButton2).setOnClickListener(onClickListener);
-        findViewById(R.id.SettingButton).setOnClickListener(onClickListener);
+        findViewById(R.id.mainWeatherIcon).setOnClickListener(onClickListener);
+        findViewById(R.id.settingButton).setOnClickListener(onClickListener);
         findViewById(R.id.calendarButton).setOnClickListener(onClickListener);
         findViewById(R.id.eventButton).setOnClickListener(onClickListener);
 
@@ -141,11 +141,11 @@ public class MainActivity extends AppCompatActivity {
                     Logout();
                     break;
 
-                case R.id.weatherInfoButton2:
+                case R.id.mainWeatherIcon:
                     GoWeather();
                     break;
 
-                case R.id.SettingButton:
+                case R.id.settingButton:
                     GoSetting();
                     break;
 
