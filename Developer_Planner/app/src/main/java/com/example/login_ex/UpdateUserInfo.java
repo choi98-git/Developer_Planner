@@ -30,6 +30,9 @@ public class UpdateUserInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_user_info);
 
+        ActionBar actionBar =getSupportActionBar();
+        actionBar.hide();
+
         user = FirebaseAuth.getInstance().getCurrentUser();
 
         findViewById(R.id.changePassword).setOnClickListener(onClickListener);

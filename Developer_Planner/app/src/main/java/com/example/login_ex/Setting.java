@@ -14,6 +14,8 @@ public class Setting extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
+        ActionBar actionBar =getSupportActionBar();
+        actionBar.hide();
 
         findViewById(R.id.btn_updateUserInfo).setOnClickListener(onClickListener);
         findViewById(R.id.btn_updatePersonInfo).setOnClickListener(onClickListener);

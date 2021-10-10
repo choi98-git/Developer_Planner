@@ -26,6 +26,9 @@ public class Check_Password extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_password);
 
+        ActionBar actionBar =getSupportActionBar();
+        actionBar.hide();
+
         emailTextView = (TextView) findViewById(R.id.emailTextView);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
         checkButton = (Button) findViewById(R.id.checkButton);

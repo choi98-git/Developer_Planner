@@ -29,6 +29,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.login_ex.calendarpart.Calendar;
 import com.example.login_ex.eventpart.EventMain;
+import com.example.login_ex.memo.MemoActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -59,10 +60,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ActionBar actionBar =getSupportActionBar();
+        actionBar.hide();
+
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Intent intent = getIntent();
-
 
         weatherIcon = findViewById(R.id.mainWeatherIcon);
         findViewById(R.id.logoutButton).setOnClickListener(onClickListener);
@@ -70,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.settingButton).setOnClickListener(onClickListener);
         findViewById(R.id.calendarButton).setOnClickListener(onClickListener);
         findViewById(R.id.eventButton).setOnClickListener(onClickListener);
+        findViewById(R.id.memo).setOnClickListener(onClickListener);
 
         //GPS 시스템 활용을 위한 Location Manager 선언
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -157,6 +161,10 @@ public class MainActivity extends AppCompatActivity {
                     GoEvent();
                     break;
 
+                case R.id.memo:
+                    GoMemo();
+                    break;
+
             }
         }
     };
@@ -188,6 +196,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void GoEvent(){
         Intent intent = new Intent(MainActivity.this, EventMain.class);
+        startActivity(intent);
+    }
+
+    private void GoMemo(){
+        Intent intent = new Intent(MainActivity.this, MemoActivity.class);
         startActivity(intent);
     }
 

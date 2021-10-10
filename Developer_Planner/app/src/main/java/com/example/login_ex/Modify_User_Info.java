@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,6 +34,9 @@ public class Modify_User_Info extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_info);
+
+        ActionBar actionBar =getSupportActionBar();
+        actionBar.hide();
 
         userName = (EditText) findViewById(R.id.userName);
         userNickname = (EditText) findViewById(R.id.userNickname);

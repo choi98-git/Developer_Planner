@@ -57,4 +57,14 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:4.2.1' // 파이어베이스 인증2
     implementation 'com.github.bumptech.glide:glide:4.9.0' // 글라인드 이미지 로딩
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0' // 클라인드 이미지 로딩2
+
+    //room
+    def room_version = "2.3.0"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    //Livedata 및 ViewModel 사용을 위한 lifecycle
+    implementation "androidx.lifecycle:lifecycle-livedata:2.3.1"
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.3.1"
+    implementation "android.arch.lifecycle:extensions:1.1.1"
 }
